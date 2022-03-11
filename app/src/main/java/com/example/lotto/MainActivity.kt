@@ -17,15 +17,23 @@ class MainActivity : AppCompatActivity() {
 
         btnBuyLotto.setOnClickListener {
 
-            Toast.makeText(this, "로또 구매 버튼 눌림", Toast.LENGTH_SHORT).show()
+            buyLotto()
         }
     }
 
-    private fun buyLotto(){
+    private fun buyLotto() {
 
 //        6개의 당첨번호
+        for (i in 0..6) {
+
+        }
+
 
 //        만들어진 당첨번호 6개를 -> 텍스트뷰
+
+//        보너스번호 생성
+
+//        텍스트뷰에 배치
     }
 
     private fun setValues() {
