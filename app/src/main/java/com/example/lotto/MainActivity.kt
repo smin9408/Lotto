@@ -24,7 +24,20 @@ class MainActivity : AppCompatActivity() {
     private fun buyLotto() {
 
 //        6개의 당첨번호
-        for (i in 0..6) {
+        for (i in 0 until 6) {
+
+//            괜찮은 번호가 나올 때 까지 무한 반복
+            while (true) {
+
+//                1 ~ 45 의 랜덤 숫자
+                val randomNum = (Math.random() * 45 + 1).toInt()
+
+//                중복 검사 통과 시 while 깨기
+                if (true) {
+                    break
+                }
+
+            }
 
         }
 
