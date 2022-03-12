@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-//        만들어진 당첨번호 6개를 -> 텍스트뷰에 표현
+//        만들어진 당첨번호 6개를 -> 작은 수 ~ 큰 수 정리해서 -> 텍스트뷰에 표현
+        mWinNumburList.sort()
+
         Log.d("당첨번호 목록", mWinNumburList.toString())
 
         for (winNum in mWinNumburList) {
