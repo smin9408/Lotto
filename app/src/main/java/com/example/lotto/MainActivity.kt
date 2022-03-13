@@ -27,6 +27,14 @@ class MainActivity : AppCompatActivity() {
     var mUsedMoney = 0
     var mEarnMoney = 0L // 30억 이상의 담청 대비. Long 타입으로 설정.
 
+//    각 등 수 별 횟수 카운팅 변수
+    var rankCount1 = 0
+    var rankCount2 = 0
+    var rankCount3 = 0
+    var rankCount4 = 0
+    var rankCount5 = 0
+    var rankCountFail = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -131,34 +139,49 @@ class MainActivity : AppCompatActivity() {
             6 -> {
                 Toast.makeText(this, "1등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                 mEarnMoney += 3000000000
+                rankCount1++
             }
             5 -> {
 //                보너스 번호를 맞췄는지? => 보너스 번호가 내 번호 목록에 들어있나?
                 if (mMyNumbers.contains(mBonusNum)) {
                     Toast.makeText(this, "2등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                     mEarnMoney += 50000000
+                    rankCount2++
                 } else {
                     Toast.makeText(this, "3등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                     mEarnMoney += 2000000
+                    rankCount3++
                 }
             }
             4 -> {
                 Toast.makeText(this, "4등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                 mEarnMoney += 50000
+                rankCount4++
             }
             3 -> {
                 Toast.makeText(this, "5등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                 mUsedMoney -= 5000
+                rankCount5++
 
             }
             else -> {
 //                Toast.makeText(this, "꽝 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+                rankCountFail++
             }
         }
 
 //        사용 금액 / 당첨 금액을 텍스트뷰에 각각 반영
         txtUsedMoney.text = "${NumberFormat.getInstance().format(mUsedMoney)} 원"
         txtEarnMoney.text = "${NumberFormat.getInstance().format(mEarnMoney)} 원"
+
+//        등 수 별 횟수도 텍스트뷰에 반영
+        txtRankCount1.text = "${rankCount1} 회"
+        txtRankCount2.text = "${rankCount2} 회"
+        txtRankCount3.text = "${rankCount3} 회"
+        txtRankCount4.text = "${rankCount4} 회"
+        txtRankCount5.text = "${rankCount5} 회"
+        txtRankCountFail.text = "${rankCountFail} 회"
+
 
     }
 
