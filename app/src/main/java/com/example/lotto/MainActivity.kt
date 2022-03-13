@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     //    코틀린은 단순 배열 초기화 int[] arr = { }; 문법 지원 X
 
     //    숫자 목록을 파라미터로 넣으면 > Array로 만들어주는 함수 실행
-    val myNumbers = arrayOf(13, 14, 24, 36, 37, 44)
+    val mMyNumbers = arrayOf(13, 14, 24, 36, 37, 44)
 
     //    컴퓨터가 뽑은 당첨번호 6개를 저장할 ArrayList
     val mWinNumburList = ArrayList<Int>()
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         var correctCount = 0
 
 //        내 번호를 하나씩 조회
-        for (myNumber in myNumbers) {
+        for (myNumber in mMyNumbers) {
 
 //            당첨번호를 맞췄는가? => 당첨번호 목록에 내 번호가 들어있나?
             if (mWinNumburList.contains(myNumber)) {
@@ -124,7 +124,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "1등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
             }
             5 -> {
-                Toast.makeText(this, "임시 3등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+//                보너스 번호를 맞췄는지? => 보너스 번호가 내 번호 목록에 들어있나?
+                if (mMyNumbers.contains(mBonusNum)) {
+                    Toast.makeText(this, "2등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "3등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+                }
             }
             4 -> {
                 Toast.makeText(this, "4등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
