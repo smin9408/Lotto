@@ -109,6 +109,34 @@ class MainActivity : AppCompatActivity() {
 //        내 번호 목록 / 당첨 번호 목록 중 , 같은 숫자가 몇개?
         var correctCount = 0
 
+//        내 번호를 하나씩 조회
+        for (myNumber in myNumbers) {
+
+//            당첨번호를 맞췄는가? => 당첨번호 목록에 내 번호가 들어있나?
+            if (mWinNumburList.contains(myNumber)) {
+                correctCount++
+            }
+        }
+
+//        맞춘 개수에 따른 등 수 판정
+        when (correctCount) {
+            6 -> {
+                Toast.makeText(this, "1등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+            }
+            5 -> {
+                Toast.makeText(this, "임시 3등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+            }
+            4 -> {
+                Toast.makeText(this, "4등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+            }
+            3 -> {
+                Toast.makeText(this, "5등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "꽝 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     private fun setValues() {
