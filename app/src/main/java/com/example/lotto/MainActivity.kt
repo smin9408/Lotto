@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     var rankCount5 = 0
     var rankCountFail = 0
 
+    var isAutoNow = false
+
 //    Handler로 쓰레드에 할일 할당 (postDelayed - 일정 시간 지난 뒤에 할일 할당)
     lateinit var  mHandler: Handler
 
@@ -76,8 +78,25 @@ class MainActivity : AppCompatActivity() {
 //            처음 눌리면 > 반복 구매 시작 > 1천만원 사용 할 때까지 반복
 //            1회 로또 구매 명령 > 완료 되면 다시 1회 로또 구매 > ... 연속 클릭을 자동으로 하는 느낌
 
-//            핸들러에게, 할 일로 처음 등록 (할 일 시작)
-            mHandler.post(buyLottoRunnable)
+            if(!isAutoNow){
+//                핸들러에게, 할 일로 처음 등록 (할 일 시작)
+                mHandler.post(buyLottoRunnable)
+
+//                자동이 돌고 있다는 표식.
+                isAutoNow = true
+                btnAutoBuy.text = "자동 구매 중단하기"
+            }
+//            반복 구매중에 눌리면 > 반복 종료
+            else{
+//                핸들러에 등록된 다음 할 일(구매) 제거
+                mHandler.removeCallbacks(buyLottoRunnable)
+
+                isAutoNow = false
+                btnAutoBuy.text = "자동 구매 재개하기"
+
+            }
+
+
 
 //            반복 구매중에 눌리면 반복 종료
         }
@@ -175,29 +194,24 @@ class MainActivity : AppCompatActivity() {
 //        맞춘 개수에 따른 등 수 판정
         when (correctCount) {
             6 -> {
-                Toast.makeText(this, "1등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                 mEarnMoney += 3000000000
                 rankCount1++
             }
             5 -> {
 //                보너스 번호를 맞췄는지? => 보너스 번호가 내 번호 목록에 들어있나?
                 if (mMyNumbers.contains(mBonusNum)) {
-                    Toast.makeText(this, "2등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                     mEarnMoney += 50000000
                     rankCount2++
                 } else {
-                    Toast.makeText(this, "3등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                     mEarnMoney += 2000000
                     rankCount3++
                 }
             }
             4 -> {
-                Toast.makeText(this, "4등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                 mEarnMoney += 50000
                 rankCount4++
             }
             3 -> {
-                Toast.makeText(this, "5등 입니다. 맞은 개수 ${correctCount}", Toast.LENGTH_SHORT).show()
                 mUsedMoney -= 5000
                 rankCount5++
 
